@@ -1,18 +1,20 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { name: "Home", href: "" },
-  { name: "About", href: "" },
-  { name: "How It Works", href: "" },
-  { name: "Pricing", href: "" },
-  { name: "FAQ", href: "" },
-  { name: "Contact", href: "" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/services" },
+  { name: "Pricing", href: "/pricing" },
+  { name: "FAQ", href: "/faq" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <nav className="w-full bg-white border-b border-gray-200 shadow-sm fixed top-0 left-0 z-50">
@@ -35,15 +37,25 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="hidden md:flex space-x-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-            >
-              {link.name}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`transition-colors font-medium ${
+                  isActive
+                    ? "text-pink-600 font-bold underline underline-offset-4"
+                    : "text-gray-700 hover:text-pink-600"
+                }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
         </div>
         <div className="md:hidden">
           <button
@@ -80,16 +92,26 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-gray-200 shadow">
           <div className="flex flex-col px-4 md:px-8 py-2 space-y-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-                onClick={() => setMenuOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(link.href);
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`transition-colors font-medium ${
+                    isActive
+                      ? "text-pink-600 font-bold underline underline-offset-4"
+                      : "text-gray-700 hover:text-pink-600"
+                  }`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
         </div>
       )}
