@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-8 px-4 shadow-inner">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-3">
           <span className="h-8 w-8 flex items-center justify-center">
             <svg
@@ -41,14 +41,11 @@ const Footer = () => {
           <a href="/about" className="hover:text-pink-400 transition-colors">
             About
           </a>
-          <a href="#" className="hover:text-pink-400 transition-colors">
+          <a href="/services" className="hover:text-pink-400 transition-colors">
             Services
           </a>
-          <a href="#" className="hover:text-pink-400 transition-colors">
-            Stories
-          </a>
-          <a href="#" className="hover:text-pink-400 transition-colors">
-            FAQ
+          <a href="/contact" className="hover:text-pink-400 transition-colors">
+            Contact
           </a>
         </nav>
         <div className="flex gap-4">

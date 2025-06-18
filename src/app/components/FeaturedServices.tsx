@@ -43,7 +43,7 @@ export default function FeaturedServices() {
       <p className="text-lg md:text-xl text-gray-500 mb-10 text-center max-w-2xl font-medium">
         Everything you need for a safe and successful experience.
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-6xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl">
         {services.map((service, idx) => (
           <div
             key={service.title}

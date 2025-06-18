@@ -11,7 +11,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/30 to-transparent pointer-events-none" />
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
+      <div className="max-w-7xl mx-auto w-full">
         <div className="relative z-10 max-w-2xl w-full py-16 flex flex-col items-start text-left animate-fade-in">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-700 drop-shadow-lg mb-4">
             Where Traditions Meet{" "}

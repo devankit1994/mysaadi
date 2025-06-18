@@ -7,8 +7,6 @@ const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
-  { name: "Pricing", href: "/pricing" },
-  { name: "FAQ", href: "/faq" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -18,7 +16,7 @@ export default function Navbar() {
 
   return (
     <nav className="w-full bg-white border-b border-gray-200 shadow-sm fixed top-0 left-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto flex items-center justify-between h-16">
         <div className="flex items-center">
           <Link
             href="/"

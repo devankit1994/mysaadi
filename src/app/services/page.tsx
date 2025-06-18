@@ -103,7 +103,7 @@ export default function ServicesPage() {
           title="Our Services"
           subtitle="Explore our wide range of professional services designed to make your special moments seamless and memorable."
         />
-        <section className="w-full max-w-7xl px-4">
+        <section className="w-full max-w-7xl">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, idx) => (
               <div

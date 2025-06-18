@@ -30,7 +30,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="w-full max-w-5xl px-4 py-12 flex flex-col items-center">
+      <section className="w-full max-w-7xl py-12 flex flex-col items-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-4">Our Values</h2>
         <div className="h-1 w-24 bg-gradient-to-r from-pink-400 via-blue-400 to-purple-400 rounded-full mb-8" />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 w-full">

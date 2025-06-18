@@ -30,7 +30,7 @@ export default function FAQSection() {
   return (
     <section className="w-full py-12 flex flex-col items-center bg-gray-50">
       <h2 className="text-2xl font-semibold mb-8">FAQs</h2>
-      <div className="w-full max-w-3xl">
+      <div className="w-full max-w-7xl">
         {faqs.map((faq, idx) => (
           <div key={faq.question} className="mb-4 border-b border-gray-200">
             <button

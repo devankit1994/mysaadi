@@ -33,7 +33,7 @@ export default function SuccessStories() {
       <p className="text-lg text-gray-500 mb-10 text-center max-w-2xl">
         Real couples who found love and happiness on our platform.
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 w-full max-w-5xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 w-full max-w-7xl">
         {stories.map((s, idx) => (
           <div
             key={s.name}
