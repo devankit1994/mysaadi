@@ -1,12 +1,14 @@
 "use client";
 import { useState } from "react";
+import { cursorTo } from "readline";
 
 const faqs = [
-  {
+  { 
     question: "How does the AI match suggestion work?",
     answer:
       "Our AI analyzes your preferences and profile details to suggest the most compatible matches for you.",
   },
+
   {
     question: "Are all profiles verified?",
     answer:
@@ -34,7 +36,7 @@ export default function FAQSection() {
         {faqs.map((faq, idx) => (
           <div key={faq.question} className="mb-4 border-b border-gray-200">
             <button
-              className="w-full text-left flex justify-between items-center py-4 px-2 font-medium text-gray-800 focus:outline-none"
+              className="w-full text-left flex justify-between items-center py-4 px-2 font-medium text-gray-800 focus:outline-none cursor-pointer "
               onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
               aria-expanded={openIndex === idx}
               aria-controls={`faq-answer-${idx}`}
