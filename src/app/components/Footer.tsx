@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -35,21 +36,27 @@ const Footer = () => {
           <span className="font-semibold text-lg tracking-wide">MySaadi</span>
         </div>
         <nav className="flex gap-6 text-sm">
-          <a href="/" className="hover:text-pink-400 transition-colors">
+          <Link href="/" className="hover:text-pink-400 transition-colors">
             Home
-          </a>
-          <a href="/about" className="hover:text-pink-400 transition-colors">
+          </Link>
+          <Link href="/about" className="hover:text-pink-400 transition-colors">
             About
-          </a>
-          <a href="/services" className="hover:text-pink-400 transition-colors">
+          </Link>
+          <Link
+            href="/services"
+            className="hover:text-pink-400 transition-colors"
+          >
             Services
-          </a>
-          <a href="/contact" className="hover:text-pink-400 transition-colors">
+          </Link>
+          <Link
+            href="/contact"
+            className="hover:text-pink-400 transition-colors"
+          >
             Contact
-          </a>
+          </Link>
         </nav>
         <div className="flex gap-4">
-          <a
+          <Link
             href="#"
             aria-label="Twitter"
             className="hover:text-pink-400 transition-colors"
@@ -57,8 +64,8 @@ const Footer = () => {
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M22.46 5.92c-.8.36-1.67.6-2.58.71a4.48 4.48 0 0 0 1.97-2.48 8.94 8.94 0 0 1-2.83 1.08 4.48 4.48 0 0 0-7.64 4.08A12.7 12.7 0 0 1 3.1 4.86a4.48 4.48 0 0 0 1.39 5.98c-.7-.02-1.36-.21-1.94-.53v.05a4.48 4.48 0 0 0 3.6 4.4c-.33.09-.68.14-1.04.14-.25 0-.5-.02-.74-.07a4.48 4.48 0 0 0 4.18 3.11A9 9 0 0 1 2 19.54a12.7 12.7 0 0 0 6.88 2.02c8.26 0 12.78-6.84 12.78-12.78 0-.2 0-.39-.01-.59a9.1 9.1 0 0 0 2.23-2.32z" />
             </svg>
-          </a>
-          <a
+          </Link>
+          <Link
             href="#"
             aria-label="Instagram"
             className="hover:text-pink-400 transition-colors"
@@ -66,8 +73,8 @@ const Footer = () => {
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zm4.25 3.25a5.25 5.25 0 1 1 0 10.5 5.25 5.25 0 0 1 0-10.5zm0 1.5a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5zm5.13.88a1.13 1.13 0 1 1-2.25 0 1.13 1.13 0 0 1 2.25 0z" />
             </svg>
-          </a>
-          <a
+          </Link>
+          <Link
             href="#"
             aria-label="LinkedIn"
             className="hover:text-pink-400 transition-colors"
@@ -75,7 +82,7 @@ const Footer = () => {
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.28c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13.5 10.28h-3v-4.5c0-1.08-.02-2.47-1.5-2.47-1.5 0-1.73 1.17-1.73 2.39v4.58h-3v-9h2.88v1.23h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v4.72z" />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="mt-6 text-center text-xs text-gray-400">

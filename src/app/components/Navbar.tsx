@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
@@ -23,9 +24,11 @@ export default function Navbar() {
             className="flex items-center space-x-2 group"
             style={{ letterSpacing: "0.05em" }}
           >
-            <img
+            <Image
               src="/wedding-rings.svg"
               alt="Wedding Rings"
+              width={32}
+              height={32}
               className="w-8 h-8 drop-shadow-md transition-transform group-hover:scale-110"
               style={{ minWidth: "2rem" }}
             />

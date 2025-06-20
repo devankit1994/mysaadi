@@ -44,7 +44,7 @@ export default function FeaturedServices() {
         Everything you need for a safe and successful experience.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-7xl">
-        {services.map((service, idx) => (
+        {services.map((service) => (
           <div
             key={service.title}
             className="group relative flex flex-col items-center bg-white rounded-2xl shadow-xl p-8 gap-4 transition-all duration-300 border-0 hover:-translate-y-2 hover:shadow-2xl hover:ring-2 hover:ring-blue-200/40"

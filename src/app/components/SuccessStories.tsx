@@ -1,19 +1,24 @@
+import Image from "next/image";
+
 const stories = [
   {
     name: "Amit & Priya",
-    image: "https://image.wedmegood.com/resized/800X/uploads/images/2aa9d109c93a4d64b6acf6295f77ab2brealwedding/1587462589_SDP_PR__50_.jpg",
+    image:
+      "https://image.wedmegood.com/resized/800X/uploads/images/2aa9d109c93a4d64b6acf6295f77ab2brealwedding/1587462589_SDP_PR__50_.jpg",
     story:
       "We met through this platform and instantly connected. Now, we’re happily married and grateful for the experience!",
   },
   {
     name: "Rahul & Sneha",
-    image:"https://www.redveds.com/wp-content/uploads/2023/09/DSC05715-scaled.jpg",
+    image:
+      "https://www.redveds.com/wp-content/uploads/2023/09/DSC05715-scaled.jpg",
     story:
       "The AI match suggestions were spot on! We found each other and couldn’t be happier.",
   },
   {
     name: "Vikram & Anjali",
-    image: "https://images.pexels.com/photos/17000468/pexels-photo-17000468.jpeg",
+    image:
+      "https://images.pexels.com/photos/17000468/pexels-photo-17000468.jpeg",
     story:
       "Verified profiles gave us confidence. Our journey together started here and it's been wonderful.",
   },
@@ -34,7 +39,7 @@ export default function SuccessStories() {
         Real couples who found love and happiness on our platform.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 w-full max-w-7xl">
-        {stories.map((s, idx) => (
+        {stories.map((s) => (
           <div
             key={s.name}
             className="flex flex-col items-center bg-white/90 rounded-2xl shadow-xl p-8 gap-4 border border-gray-100 transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:border-blue-200 relative group"
@@ -48,9 +53,11 @@ export default function SuccessStories() {
             >
               <path d="M7.17 6.17A5.001 5.001 0 0 0 2 11v2a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3v-2a5 5 0 0 0-2.83-4.46zm9 0A5.001 5.001 0 0 0 11 11v2a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3v-2a5 5 0 0 0-2.83-4.46z" />
             </svg>
-            <img
+            <Image
               src={s.image}
               alt={s.name}
+              width={96}
+              height={96}
               className="w-24 h-24 rounded-full object-cover mb-2 border-4 border-blue-200 shadow-lg group-hover:border-pink-300 transition-all"
               loading="lazy"
             />
