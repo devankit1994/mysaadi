@@ -15,7 +15,7 @@ const stories = [
     name: "Vikram & Anjali",
     image: "https://randomuser.me/api/portraits/men/65.jpg",
     story:
-      "Verified profiles gave us confidence. Our journey together started here and it’s been wonderful.",
+      "Verified profiles gave us confidence. Our journey together started here and it's been wonderful.",
   },
 ];
 

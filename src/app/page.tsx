@@ -2,7 +2,6 @@ import HeroSection from "./components/HeroSection";
 import FeaturedServices from "./components/FeaturedServices";
 import SuccessStories from "./components/SuccessStories";
 import FAQSection from "./components/FAQSection";
-import Footer from "./components/Footer";
 
 export default function Home() {
   return (
