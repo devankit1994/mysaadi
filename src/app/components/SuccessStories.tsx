@@ -1,19 +1,19 @@
 const stories = [
   {
     name: "Amit & Priya",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
+    image: "https://image.wedmegood.com/resized/800X/uploads/images/2aa9d109c93a4d64b6acf6295f77ab2brealwedding/1587462589_SDP_PR__50_.jpg",
     story:
       "We met through this platform and instantly connected. Now, we’re happily married and grateful for the experience!",
   },
   {
     name: "Rahul & Sneha",
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    image:"https://www.redveds.com/wp-content/uploads/2023/09/DSC05715-scaled.jpg",
     story:
       "The AI match suggestions were spot on! We found each other and couldn’t be happier.",
   },
   {
     name: "Vikram & Anjali",
-    image: "https://randomuser.me/api/portraits/men/65.jpg",
+    image: "https://images.pexels.com/photos/17000468/pexels-photo-17000468.jpeg",
     story:
       "Verified profiles gave us confidence. Our journey together started here and it's been wonderful.",
   },
