@@ -38,7 +38,7 @@ export default function ContactPage() {
           </h2>
           {submitted && (
             <div className="mb-4 text-green-600 font-medium">
-              Thank you for reaching out! We'll get back to you soon.
+              Thank you for reaching out! We&#39;ll get back to you soon.
             </div>
           )}
           {error && (

@@ -10,8 +10,6 @@ import {
   FaUserSecret,
   FaHeart,
 } from "react-icons/fa";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import PageHero from "../components/PageHero";
 
 const services = [
