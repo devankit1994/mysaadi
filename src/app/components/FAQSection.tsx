@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-
 const faqs = [
   { 
     question: "How does the AI match suggestion work?",
