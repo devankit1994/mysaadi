@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import Image from 'next/image';
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -23,7 +24,7 @@ export default function Navbar() {
             className="flex items-center space-x-2 group"
             style={{ letterSpacing: "0.05em" }}
           >
-            <img
+            <Image
               src="/wedding-rings.svg"
               alt="Wedding Rings"
               className="w-8 h-8 drop-shadow-md transition-transform group-hover:scale-110"

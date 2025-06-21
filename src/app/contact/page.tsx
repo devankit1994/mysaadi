@@ -28,7 +28,7 @@ export default function ContactPage() {
     <main className="flex flex-col items-center w-full min-h-screen bg-gradient-to-br from-pink-50 via-white to-blue-50">
       <PageHero
         title="Contact Us"
-        subtitle="We'd love to hear from you! Reach out with your questions or feedback."
+        subtitle="We&apos;d love to hear from you! Reach out with your questions or feedback."
       />
 
       <section className="w-full max-w-7xl py-12 grid grid-cols-1 md:grid-cols-2 gap-12">

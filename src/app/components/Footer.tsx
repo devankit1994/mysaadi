@@ -35,7 +35,7 @@ const Footer = () => {
           <span className="font-semibold text-lg tracking-wide">MySaadi</span>
         </div>
         <nav className="flex gap-6 text-sm">
-          <a href="/" className="hover:text-pink-400 transition-colors">
+          <a href="/home" className="hover:text-pink-400 transition-colors">
             Home
           </a>
           <a href="/about" className="hover:text-pink-400 transition-colors">

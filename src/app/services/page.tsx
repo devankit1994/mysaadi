@@ -10,8 +10,8 @@ import {
   FaUserSecret,
   FaHeart,
 } from "react-icons/fa";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+// import Navbar from "../components/Navbar";
+// import Footer from "../components/Footer";
 import PageHero from "../components/PageHero";
 
 const services = [
@@ -105,7 +105,7 @@ export default function ServicesPage() {
         />
         <section className="w-full max-w-7xl">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, idx) => (
+            {services.map((service) => (
               <div
                 key={service.title}
                 className="group flex flex-col items-center bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 border-0 hover:-translate-y-2 hover:shadow-2xl hover:ring-2 hover:ring-pink-200/40"
