@@ -5,7 +5,6 @@ import {
   FaGavel,
   FaPlane,
   FaStar,
-  FaCheckCircle,
   FaArrowRight,
   FaHeart,
   FaGem,
@@ -228,7 +227,7 @@ export default function ServicesPage() {
         <section className="py-8 md:py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-12">
-              {services.map((service, idx) => (
+              {services.map((service) => (
                 <div
                   key={service.title}
                   className={`group relative overflow-hidden rounded-3xl bg-gradient-to-br ${service.bgGradient} p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/50`}
@@ -275,7 +274,7 @@ export default function ServicesPage() {
                         <span
                           className={`w-2 h-2 rounded-full bg-gradient-to-r ${service.gradient} mr-3`}
                         ></span>
-                        What's Included
+                        What&apos;s Included
                       </h4>
                       <div className="grid grid-cols-1 gap-3 max-h-64 overflow-y-auto">
                         {service.details.map((detail, i) => (

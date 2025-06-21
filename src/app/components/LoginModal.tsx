@@ -12,23 +12,25 @@ import {
 const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
-  const [confirmationResult, setConfirmationResult] = useState<any>(null);
+  const [confirmationResult, setConfirmationResult] = useState<
+    import("firebase/auth").ConfirmationResult | null
+  >(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   // Setup reCAPTCHA only once
   const setupRecaptcha = () => {
-    if (!(window as any).recaptchaVerifier) {
-      (window as any).recaptchaVerifier = new RecaptchaVerifier(
-        "recaptcha-container",
-        {
+    if (
+      !(window as { recaptchaVerifier?: RecaptchaVerifier }).recaptchaVerifier
+    ) {
+      (window as { recaptchaVerifier?: RecaptchaVerifier }).recaptchaVerifier =
+        new RecaptchaVerifier(auth, "recaptcha-container", {
           size: "invisible",
           callback: () => {},
-        },
-        auth
-      );
+        });
     }
-    return (window as any).recaptchaVerifier;
+    return (window as { recaptchaVerifier?: RecaptchaVerifier })
+      .recaptchaVerifier;
   };
 
   const handleSendOtp = async () => {
@@ -38,8 +40,12 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       const appVerifier = setupRecaptcha();
       const result = await signInWithPhoneNumber(auth, phone, appVerifier);
       setConfirmationResult(result);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred.");
+      }
     }
     setLoading(false);
   };
@@ -48,9 +54,16 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     setError("");
     setLoading(true);
     try {
+      if (!confirmationResult) {
+        setError(
+          "OTP confirmation is not available. Please request a new OTP."
+        );
+        setLoading(false);
+        return;
+      }
       await confirmationResult.confirm(otp);
       onClose();
-    } catch (err: any) {
+    } catch {
       setError("Invalid OTP. Please try again.");
     }
     setLoading(false);
@@ -63,7 +76,7 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
       onClose();
-    } catch (err: any) {
+    } catch {
       setError("Google sign-in failed.");
     }
     setLoading(false);

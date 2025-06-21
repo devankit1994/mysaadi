@@ -41,8 +41,8 @@ export default function ContactPage() {
                   Send us a message
                 </h2>
                 <p className="text-gray-600 text-lg">
-                  Fill out the form below and we'll get back to you within 24
-                  hours.
+                  Fill out the form below and we&#39;ll get back to you within
+                  24 hours.
                 </p>
               </div>
 
@@ -65,7 +65,8 @@ export default function ContactPage() {
                       </svg>
                     </div>
                     <span className="text-emerald-700 font-medium">
-                      Thank you for reaching out! We'll get back to you soon.
+                      Thank you for reaching out! We&#39;ll get back to you
+                      soon.
                     </span>
                   </div>
                 </div>
