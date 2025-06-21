@@ -31,7 +31,7 @@ export default function ContactPage() {
         subtitle="We'd love to hear from you! Reach out with your questions or feedback."
       />
 
-      <section className="w-full max-w-7xl py-12 grid grid-cols-1 md:grid-cols-2 gap-12">
+      <section className="w-full max-w-7xl px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-12">
         <div className="bg-white rounded-2xl shadow-xl p-8 flex flex-col justify-center">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">
             Send us a message
