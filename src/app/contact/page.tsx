@@ -31,7 +31,7 @@ export default function ContactPage() {
         subtitle="Ready to start your journey? We're here to help make your dreams come true."
       />
 
-      <section className="w-full max-w-7xl px-4 py-16 lg:py-20">
+      <section className="w-full max-w-7xl px-4 py-8 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Contact Form - Takes 2 columns on large screens */}
           <div className="lg:col-span-2">
@@ -303,7 +303,7 @@ export default function ContactPage() {
         </div>
 
         {/* Map Card - Full Width */}
-        <div className="w-full max-w-7xl mx-auto px-4 py-8 mt-16">
+        <div className="w-full max-w-7xl mx-auto px-4 py-8 md:mt-16">
           <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
             <div className="p-6 pb-0">
               <h2 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-500 bg-clip-text text-transparent mb-3 flex items-center gap-3">

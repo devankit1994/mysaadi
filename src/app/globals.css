@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
+
+/* Hero section responsive height */
+.hero-section {
+  min-height: calc(100vh - 4rem);
+  background-image: url("/banner.png");
+}
+@media (max-width: 640px) {
+  .hero-section {
+    min-height: 60vh;
+    background-image: url("/banner-sm.png");
+  }
+}

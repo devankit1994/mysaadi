@@ -1,18 +1,12 @@
 export default function HeroSection() {
   return (
-    <section
-      className="relative w-full flex items-center justify-start overflow-hidden bg-cover bg-center bg-no-repeat"
-      style={{
-        minHeight: "calc(100vh - 4rem)",
-        backgroundImage: "url('/banner.png')",
-      }}
-    >
+    <section className="hero-section relative w-full flex md:items-center justify-start overflow-hidden bg-cover bg-center bg-no-repeat">
       {/* Overlay for readability */}
       <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/30 to-transparent pointer-events-none" />
 
       {/* Content */}
       <div className="max-w-7xl px-4 mx-auto w-full">
-        <div className="relative z-10 max-w-2xl w-full py-16 flex flex-col items-start text-left animate-fade-in">
+        <div className="relative z-10 max-w-2xl w-full py-16 flex flex-col items-center md:items-start text-center md:text-left animate-fade-in">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-700 drop-shadow-lg mb-4">
             Where Traditions Meet{" "}
             <span className="bg-gradient-to-r from-pink-600 via-red-500 to-yellow-500 bg-clip-text text-transparent">
