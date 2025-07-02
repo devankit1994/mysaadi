@@ -35,6 +35,12 @@ const EmailPasswordSignupForm: React.FC<EmailPasswordSignupFormProps> = ({
     setFormError("");
     setFormLoading(true);
 
+    if (password.length < 6) {
+      setFormError("Password should be at least 6 characters.");
+      setFormLoading(false);
+      return;
+    }
+
     if (password !== confirmPassword) {
       setFormError("Passwords do not match.");
       setFormLoading(false);
@@ -45,6 +51,12 @@ const EmailPasswordSignupForm: React.FC<EmailPasswordSignupFormProps> = ({
       email,
       password,
     });
+
+    if (data.user && data.user.user_metadata?.email_verified === false) {
+      setFormError("Email already exists. Please log in instead.");
+      setFormLoading(false);
+      return;
+    }
 
     if (data.user) {
       onClose();
@@ -117,7 +129,7 @@ const EmailPasswordSignupForm: React.FC<EmailPasswordSignupFormProps> = ({
         </div>
         <button
           type="submit"
-          className="w-full flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-pink-500 to-red-500 text-white py-4 font-semibold shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
+          className="w-full flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-pink-500 to-red-500 text-white py-4 font-semibold shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none cursor-pointer"
           disabled={formLoading}
         >
           {formLoading ? (
