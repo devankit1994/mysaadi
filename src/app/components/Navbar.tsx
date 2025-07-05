@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import LoginModal from "./LoginModal";
+import { checkLoginStatus, subscribeToAuthChanges } from "@/utils/auth";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -15,7 +16,23 @@ const navLinks = [
 export default function Navbar() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const checkStatus = async () => {
+      const status = await checkLoginStatus();
+      setIsLoggedIn(status);
+    };
+
+    checkStatus();
+
+    const unsubscribe = subscribeToAuthChanges(setIsLoggedIn);
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   function handleNavClick() {
     setMobileMenuOpen(false);
@@ -66,13 +83,15 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            <button
-              className="ml-6 px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-500 text-white shadow-lg transition-all duration-200 transform hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 cursor-pointer"
-              style={{ letterSpacing: "0.04em" }}
-              onClick={() => setLoginOpen(true)}
-            >
-              <span className="flex items-center gap-2">Login</span>
-            </button>
+            {!isLoggedIn && (
+              <button
+                className="ml-6 px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-500 text-white shadow-lg transition-all duration-200 transform hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 cursor-pointer"
+                style={{ letterSpacing: "0.04em" }}
+                onClick={() => setLoginOpen(true)}
+              >
+                <span className="flex items-center gap-2">Login</span>
+              </button>
+            )}
           </div>
           {/* Hamburger Button for Mobile */}
           <button
@@ -166,16 +185,18 @@ export default function Navbar() {
                   </Link>
                 );
               })}
-              <button
-                className="mt-6 px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-500 text-white shadow-lg transition-all duration-200 transform hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 cursor-pointer"
-                style={{ letterSpacing: "0.04em" }}
-                onClick={() => {
-                  setLoginOpen(true);
-                  setMobileMenuOpen(false);
-                }}
-              >
-                Login
-              </button>
+              {!isLoggedIn && (
+                <button
+                  className="mt-6 px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-500 text-white shadow-lg transition-all duration-200 transform hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 cursor-pointer"
+                  style={{ letterSpacing: "0.04em" }}
+                  onClick={() => {
+                    setLoginOpen(true);
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  Login
+                </button>
+              )}
             </nav>
           </div>
           {/* Animation keyframes */}
