@@ -1,5 +1,5 @@
 "use client";
-
+import { supabase } from "@/lib/supabaseClient";
 import React, { useState } from "react";
 import Image from "next/image";
 import EmailPasswordLoginForm from "./EmailPasswordLoginForm";
@@ -17,14 +17,18 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [formError, setFormError] = useState("");
 
   const handleGoogleSignIn = async () => {
-    setError("");
-    setLoading(true);
-    try {
-      onClose();
-    } catch {
-      setError("Google sign-in failed.");
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`, // optional
+      },
+    });
+
+    if (error) {
+      console.error("Google login failed:", error.message);
+    } else {
+      console.log("Redirecting to Google...");
     }
-    setLoading(false);
   };
 
   return (
