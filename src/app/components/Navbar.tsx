@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import LoginModal from "./LoginModal";
-import { checkLoginStatus, subscribeToAuthChanges } from "@/utils/auth";
+import { checkLoginStatus, subscribeToAuthChanges, logout } from "@/utils/auth";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -16,18 +16,19 @@ const navLinks = [
 export default function Navbar() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userSession, setUserSession] = useState<any | null>(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const checkStatus = async () => {
-      const status = await checkLoginStatus();
-      setIsLoggedIn(status);
+      const session = await checkLoginStatus();
+      setUserSession(session);
     };
 
     checkStatus();
 
-    const unsubscribe = subscribeToAuthChanges(setIsLoggedIn);
+    const unsubscribe = subscribeToAuthChanges(setUserSession);
 
     return () => {
       unsubscribe();
@@ -37,6 +38,38 @@ export default function Navbar() {
   function handleNavClick() {
     setMobileMenuOpen(false);
   }
+
+  const getUserDisplay = () => {
+    if (userSession?.user?.user_metadata?.avatar_url) {
+      return (
+        <Image
+          src={userSession.user.user_metadata.avatar_url}
+          alt="User Profile"
+          width={32}
+          height={32}
+          className="rounded-full"
+        />
+      );
+    } else if (userSession?.user?.user_metadata?.full_name) {
+      const initial = userSession.user.user_metadata.full_name
+        .charAt(0)
+        .toUpperCase();
+      return (
+        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-pink-600 text-white font-bold">
+          {initial}
+        </div>
+      );
+    }
+    return (
+      <Image
+        src="/user.png"
+        alt="User Profile"
+        width={28}
+        height={28}
+        className="rounded-full"
+      />
+    );
+  };
 
   return (
     <>
@@ -83,7 +116,30 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            {!isLoggedIn && (
+            {userSession ? (
+              <div className="ml-6 relative">
+                {" "}
+                <div
+                  className="cursor-pointer"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                >
+                  {getUserDisplay()}
+                </div>
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                    <button
+                      onClick={() => {
+                        logout();
+                        setDropdownOpen(false);
+                      }}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
               <button
                 className="ml-6 px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-500 text-white shadow-lg transition-all duration-200 transform hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 cursor-pointer"
                 style={{ letterSpacing: "0.04em" }}
@@ -185,7 +241,31 @@ export default function Navbar() {
                   </Link>
                 );
               })}
-              {!isLoggedIn && (
+              {userSession ? (
+                <div className="mt-6 relative">
+                  {" "}
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                  >
+                    {getUserDisplay()}
+                  </div>
+                  {dropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                      <button
+                        onClick={() => {
+                          logout();
+                          setDropdownOpen(false);
+                          setMobileMenuOpen(false);
+                        }}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
                 <button
                   className="mt-6 px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-500 text-white shadow-lg transition-all duration-200 transform hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 cursor-pointer"
                   style={{ letterSpacing: "0.04em" }}
