@@ -75,7 +75,7 @@ const EmailPasswordLoginForm: React.FC<EmailPasswordLoginFormProps> = ({
         </div>
         <button
           type="submit"
-          className="w-full flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-pink-500 to-red-500 text-white py-4 font-semibold shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
+          className="w-full flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-pink-500 to-red-500 text-white py-4 font-semibold shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none cursor-pointer"
           disabled={formLoading}
         >
           {formLoading ? (

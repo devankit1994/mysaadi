@@ -53,7 +53,9 @@ const EmailPasswordSignupForm: React.FC<EmailPasswordSignupFormProps> = ({
     });
 
     if (data.user && data.user.user_metadata?.email_verified === false) {
-      setFormError("Email already exists. Please log in instead.");
+      setFormError(
+        "Email already exists. Check your inbox to confirm your signup."
+      );
       setFormLoading(false);
       return;
     }
