@@ -19,15 +19,10 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const handleGoogleSignIn = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`, // optional
-      },
     });
 
     if (error) {
       console.error("Google login failed:", error.message);
-    } else {
-      console.log("Redirecting to Google...");
     }
   };
 
