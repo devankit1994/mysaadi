@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { Session } from "@supabase/supabase-js";
 import { usePathname } from "next/navigation";
 import LoginModal from "./LoginModal";
 import { checkLoginStatus, subscribeToAuthChanges, logout } from "@/utils/auth";
@@ -16,7 +17,7 @@ const navLinks = [
 export default function Navbar() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [userSession, setUserSession] = useState<any | null>(null);
+  const [userSession, setUserSession] = useState<Session | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
 

@@ -8,8 +8,8 @@ import EmailPasswordSignupForm from "./EmailPasswordSignupForm";
 const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [isLogin, setIsLogin] = useState(true);
   const toggleForm = () => setIsLogin(!isLogin);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [error] = useState("");
+  const [loading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -17,7 +17,7 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [formError, setFormError] = useState("");
 
   const handleGoogleSignIn = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
     });
 
@@ -151,7 +151,7 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
             {isLogin ? (
               <>
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <button
                   type="button"
                   onClick={toggleForm}
