@@ -28,16 +28,19 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-      <div className="relative w-98 md:w-full max-w-4xl rounded-3xl bg-white/95 dark:bg-[#18181b]/95 shadow-2xl border border-pink-200/50 dark:border-pink-900/50 backdrop-blur-xl transition-all duration-300 animate-in fade-in-0 zoom-in-95 flex flex-row">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
+      <div className="relative w-full max-w-4xl rounded-3xl bg-white/95 dark:bg-[#18181b]/95 shadow-2xl border border-pink-200/50 dark:border-pink-900/50 backdrop-blur-xl transition-all duration-300 animate-in fade-in-0 zoom-in-95 flex flex-col md:flex-row max-h-[90vh] overflow-y-auto">
+        {/* Close Button */}
         <button
-          className="absolute top-4 right-4 text-gray-400 hover:text-pink-600 dark:hover:text-pink-400 transition-all duration-200 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-pink-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-pink-50 dark:hover:bg-pink-900/20 cursor-pointer"
+          className="absolute top-4 right-4 text-gray-400 hover:text-pink-600 dark:hover:text-pink-400 transition-all duration-200 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-pink-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-pink-50 dark:hover:bg-pink-900/20"
           onClick={onClose}
           aria-label="Close"
         >
           &times;
         </button>
-        <div className="w-1/2 p-8 py-16 flex flex-col items-center justify-center">
+
+        {/* Left Side (Brand) */}
+        <div className="w-full md:w-1/2 p-6 md:p-8 py-10 md:py-16 flex flex-col items-center justify-center">
           <div className="mb-6 flex flex-col items-center justify-center gap-3">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-red-500 to-yellow-500 rounded-2xl blur-lg opacity-30 animate-pulse"></div>
@@ -56,21 +59,22 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               <span className="text-3xl font-extrabold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-500 bg-clip-text text-transparent drop-shadow-lg tracking-wide mb-2 block">
                 MySaadi
               </span>
-              <span className="text-lg font-semibold text-gray-800 dark:text-gray-200 tracking-tight select-none">
+              <span className="text-lg font-semibold text-gray-800 dark:text-gray-200 tracking-tight">
                 Welcome Back
               </span>
-              <span className="text-sm text-gray-500 dark:text-gray-400 text-center font-medium mt-1 block">
+              <span className="text-sm text-gray-500 dark:text-gray-400 font-medium mt-1 block">
                 Sign in to continue your journey
               </span>
             </div>
           </div>
         </div>
 
-        <div className="w-1/2 p-8 py-16">
+        {/* Right Side (Form) */}
+        <div className="w-full md:w-1/2 p-6 md:p-8 py-10 md:py-16">
           {/* Google Sign-In */}
           <div className="space-y-4">
             <button
-              className="w-full flex items-center justify-center gap-3 rounded-2xl bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 hover:border-pink-300 dark:hover:border-pink-700 text-gray-700 dark:text-gray-200 py-4 font-semibold shadow-sm hover:shadow-md transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none group cursor-pointer"
+              className="w-full flex items-center justify-center gap-3 rounded-2xl bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 hover:border-pink-300 dark:hover:border-pink-700 text-gray-700 dark:text-gray-200 py-4 font-semibold shadow-sm hover:shadow-md transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none group"
               onClick={handleGoogleSignIn}
               disabled={loading}
             >
@@ -102,6 +106,7 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             <div className="flex-grow border-t border-pink-200/60 dark:border-pink-800/60"></div>
           </div>
 
+          {/* Forms */}
           {isLogin ? (
             <EmailPasswordLoginForm
               onClose={onClose}
@@ -121,14 +126,16 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               setEmail={setEmail}
               password={password}
               setPassword={setPassword}
+              confirmPassword={confirmPassword}
+              setConfirmPassword={setConfirmPassword}
               formLoading={formLoading}
               setFormLoading={setFormLoading}
               formError={formError}
               setFormError={setFormError}
-              confirmPassword={confirmPassword}
-              setConfirmPassword={setConfirmPassword}
             />
           )}
+
+          {/* Error */}
           {error && (
             <div className="mt-4 rounded-2xl bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800/50 px-4 py-3 text-red-700 dark:text-red-300 text-sm font-medium shadow-sm animate-in fade-in-0 slide-in-from-top-2 duration-300">
               <div className="flex items-center gap-2">
@@ -148,7 +155,7 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             </div>
           )}
 
-          {/* Link to switch forms */}
+          {/* Toggle Link */}
           <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
             {isLogin ? (
               <>
@@ -156,7 +163,7 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 <button
                   type="button"
                   onClick={toggleForm}
-                  className="font-semibold cursor-pointer text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300 focus:outline-none focus:underline"
+                  className="font-semibold text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300 focus:outline-none focus:underline"
                 >
                   Sign Up
                 </button>
@@ -167,7 +174,7 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 <button
                   type="button"
                   onClick={toggleForm}
-                  className="font-semibold cursor-pointer text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300 focus:outline-none focus:underline"
+                  className="font-semibold text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300 focus:outline-none focus:underline"
                 >
                   Sign In
                 </button>
