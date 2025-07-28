@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
       "image.wedmegood.com",
       "www.redveds.com",
       "images.pexels.com",
+      "lh3.googleusercontent.com",
     ],
   },
 };

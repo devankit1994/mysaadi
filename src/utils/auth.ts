@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabaseClient";
+import { Session } from "@supabase/supabase-js";
 
 export async function checkLoginStatus() {
   const {
@@ -8,7 +9,7 @@ export async function checkLoginStatus() {
 }
 
 export function subscribeToAuthChanges(
-  callback: (session: any | null) => void
+  callback: (session: Session | null) => void
 ) {
   const { data: authListener } = supabase.auth.onAuthStateChange(
     (_event, session) => {
