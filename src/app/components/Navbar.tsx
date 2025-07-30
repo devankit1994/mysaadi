@@ -128,12 +128,19 @@ export default function Navbar() {
                 </div>
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                    <Link
+                      href="/profile"
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Profile
+                    </Link>
                     <button
                       onClick={() => {
                         logout();
                         setDropdownOpen(false);
                       }}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                     >
                       Logout
                     </button>
@@ -253,13 +260,23 @@ export default function Navbar() {
                   </div>
                   {dropdownOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                      <Link
+                        href="/profile"
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => {
+                          setDropdownOpen(false);
+                          setMobileMenuOpen(false);
+                        }}
+                      >
+                        Profile
+                      </Link>
                       <button
                         onClick={() => {
                           logout();
                           setDropdownOpen(false);
                           setMobileMenuOpen(false);
                         }}
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                       >
                         Logout
                       </button>
