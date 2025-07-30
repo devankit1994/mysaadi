@@ -1,5 +1,6 @@
 "use client";
 
+import { supabase } from "@/lib/supabaseClient";
 import React, { FormEvent } from "react";
 
 interface EmailPasswordLoginFormProps {
@@ -29,11 +30,18 @@ const EmailPasswordLoginForm: React.FC<EmailPasswordLoginFormProps> = ({
     e.preventDefault();
     setFormError("");
     setFormLoading(true);
-    // TODO: Implement Supabase email/password sign-in logic
-    if (email === "test@example.com" && password === "password") {
-      onClose();
-    } else {
-      setFormError("Invalid email or password (simulated).");
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) {
+        setFormError(error.message);
+      } else {
+        onClose();
+      }
+    } catch (err: any) {
+      setFormError(err.message || "An unexpected error occurred.");
     }
     setFormLoading(false);
   };
