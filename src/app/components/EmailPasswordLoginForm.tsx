@@ -31,7 +31,7 @@ const EmailPasswordLoginForm: React.FC<EmailPasswordLoginFormProps> = ({
     setFormError("");
     setFormLoading(true);
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -40,8 +40,12 @@ const EmailPasswordLoginForm: React.FC<EmailPasswordLoginFormProps> = ({
       } else {
         onClose();
       }
-    } catch (err: any) {
-      setFormError(err.message || "An unexpected error occurred.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setFormError(err.message);
+      } else {
+        setFormError("An unexpected error occurred.");
+      }
     }
     setFormLoading(false);
   };
