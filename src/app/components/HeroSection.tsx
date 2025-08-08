@@ -22,13 +22,14 @@ export default function HeroSection() {
       heading: "",
       highlight: "Spy Services",
       highlightClass:
-        "bg-gradient-to-r from-blue-700 via-purple-500 to-green-400 bg-clip-text text-transparent",
+        "bg-gradient-to-r from-pink-600 via-red-500 to-yellow-500 bg-clip-text text-transparent",
       subheading:
         "Ensure peace of mind with our discreet pre-matrimonial investigation services. We help you verify backgrounds, check credentials, and uncover hidden details—so you can make informed decisions for your family’s future.",
       buttonText: "Learn More",
       buttonLink: "#spy-services",
       buttonClass:
-        "bg-gradient-to-r from-blue-700 via-purple-500 to-green-400 hover:from-blue-800 hover:via-purple-600 hover:to-green-500 text-white font-semibold text-lg px-8 py-3 rounded-full shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mb-8",
+        "bg-gradient-to-r from-pink-600 via-red-500 to-yellow-500 hover:from-pink-700 hover:via-red-600 hover:to-yellow-600 text-white font-semibold text-lg px-8 py-3 rounded-full shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 mb-8",
+      backgroundImage: "/banner-1.png",
     },
   ];
 
@@ -53,6 +54,16 @@ export default function HeroSection() {
               : "opacity-0 pointer-events-none"
           }`}
           aria-hidden={slide !== idx}
+          style={
+            slideData.backgroundImage
+              ? {
+                  backgroundImage: `url('${slideData.backgroundImage}')`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }
+              : undefined
+          }
         >
           <div className="max-w-7xl px-4 mx-auto w-full">
             <div className="relative z-10 max-w-2xl w-full py-16 flex flex-col items-center md:items-start text-center md:text-left animate-fade-in">
