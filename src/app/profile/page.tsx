@@ -15,6 +15,7 @@ type Profile = {
 };
 
 
+
 export default function ProfilePage() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
