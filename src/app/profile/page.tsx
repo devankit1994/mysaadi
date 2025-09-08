@@ -100,7 +100,6 @@ export default function ProfilePage() {
                 {profile.bio || "N/A"}
               </div>
             </div>
-
             <div className="pt-6">
               <button
                 onClick={() => router.push("/profile/update")}
@@ -109,7 +108,6 @@ export default function ProfilePage() {
                 Edit Profile
               </button>
             </div>
-            
           </div>
         ) : (
           <p>No profile data found.</p>
