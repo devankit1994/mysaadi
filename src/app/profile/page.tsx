@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 
 type Profile = {
@@ -18,12 +19,13 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const router = useRouter();
+
   useEffect(() => {
     const fetchProfile = async () => {
       setLoading(true);
       setError(null);
 
-      // Get current user
       const { data: userData, error: userError } =
         await supabase.auth.getUser();
       if (userError || !userData?.user) {
@@ -33,7 +35,6 @@ export default function ProfilePage() {
       }
       const userId = userData.user.id;
 
-      // Fetch profile
       const { data, error: profileError } = await supabase
         .from("profiles")
         .select(
@@ -59,6 +60,7 @@ export default function ProfilePage() {
     <div className="min-h-screen flex items-center justify-center">
       <div className="max-w-2xl mx-auto p-6 w-full">
         <h1 className="text-2xl font-bold mb-4">Profile</h1>
+
         {loading ? (
           <p>Loading...</p>
         ) : error ? (
@@ -98,6 +100,16 @@ export default function ProfilePage() {
                 {profile.bio || "N/A"}
               </div>
             </div>
+
+            <div className="pt-6">
+              <button
+                onClick={() => router.push("/profile/update")}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
+                Edit Profile
+              </button>
+            </div>
+            
           </div>
         ) : (
           <p>No profile data found.</p>
