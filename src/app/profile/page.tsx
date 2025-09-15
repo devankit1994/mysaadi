@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import CommonButton from "../components/CommonButton";
+import { useRouter } from "next/navigation";
 
 type Profile = {
   first_name: string;
@@ -17,6 +19,7 @@ export default function ProfilePage() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter(); 
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -97,6 +100,13 @@ export default function ProfilePage() {
               <div className="mt-1 whitespace-pre-line">
                 {profile.bio || "N/A"}
               </div>
+            </div>
+
+            <div className="pt-4">
+              <CommonButton
+                text="Edit Profile"
+                onClick={() => router.push("/profile/update")}
+              />
             </div>
           </div>
         ) : (
