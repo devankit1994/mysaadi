@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
+import CommonButton from "../components/CommonButton";
 
 type Profile = {
   first_name: string;
@@ -18,7 +19,6 @@ export default function ProfilePage() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -100,13 +100,12 @@ export default function ProfilePage() {
                 {profile.bio || "N/A"}
               </div>
             </div>
-            <div className="pt-6">
-              <button
+
+            <div className="pt-4">
+              <CommonButton
+                text="Edit Profile"
                 onClick={() => router.push("/profile/update")}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-              >
-                Edit Profile
-              </button>
+              />
             </div>
           </div>
         ) : (

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import CommonButton from "../../components/CommonButton";
 
 export default function UpdateProfilePage() {
   const [form, setForm] = useState<{
@@ -140,12 +141,8 @@ export default function UpdateProfilePage() {
             />
           </div>
 
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer"
-          >
-            Submit
-          </button>
+          <CommonButton text="Save Changes" type="submit" />
+
         </form>
       </div>
     </div>
