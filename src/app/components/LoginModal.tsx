@@ -74,7 +74,7 @@ const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           {/* Google Sign-In */}
           <div className="space-y-4">
             <button
-              className="w-full flex items-center justify-center gap-3 rounded-2xl bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 hover:border-pink-300 dark:hover:border-pink-700 text-gray-700 dark:text-gray-200 py-4 font-semibold shadow-sm hover:shadow-md transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none group"
+              className="w-full flex items-center justify-center gap-3 rounded-2xl bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 hover:border-pink-300 dark:hover:border-pink-700 text-gray-700 dark:text-gray-200 py-4 font-semibold shadow-sm hover:shadow-md transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none group cursor-pointer"
               onClick={handleGoogleSignIn}
               disabled={loading}
             >

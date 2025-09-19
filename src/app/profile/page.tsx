@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import CommonButton from "../components/CommonButton";
-import { useRouter } from "next/navigation";
 
 type Profile = {
   first_name: string;
@@ -19,14 +19,13 @@ export default function ProfilePage() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter(); 
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProfile = async () => {
       setLoading(true);
       setError(null);
 
-      // Get current user
       const { data: userData, error: userError } =
         await supabase.auth.getUser();
       if (userError || !userData?.user) {
@@ -36,7 +35,6 @@ export default function ProfilePage() {
       }
       const userId = userData.user.id;
 
-      // Fetch profile
       const { data, error: profileError } = await supabase
         .from("profiles")
         .select(
@@ -62,6 +60,7 @@ export default function ProfilePage() {
     <div className="min-h-screen flex items-center justify-center">
       <div className="max-w-2xl mx-auto p-6 w-full">
         <h1 className="text-2xl font-bold mb-4">Profile</h1>
+
         {loading ? (
           <p>Loading...</p>
         ) : error ? (
