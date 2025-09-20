@@ -14,7 +14,7 @@ const CommonButton: React.FC<CommonButtonProps> = ({
   variant = "primary",
 }) => {
   const baseStyles =
-    "px-6 py-3 rounded-full font-semibold transition duration-300 ease-in-out shadow-md";
+    "px-6 py-3 rounded-full font-semibold transition duration-300 ease-in-out shadow-md cursor-pointer";
 
   const variantStyles =
     variant === "primary"
