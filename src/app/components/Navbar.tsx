@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Session } from "@supabase/supabase-js";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import LoginModal from "./LoginModal";
 import { checkLoginStatus, subscribeToAuthChanges, logout } from "@/utils/auth";
 
@@ -20,6 +20,7 @@ export default function Navbar() {
   const [userSession, setUserSession] = useState<Session | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const checkStatus = async () => {
@@ -119,7 +120,6 @@ export default function Navbar() {
             })}
             {userSession ? (
               <div className="ml-6 relative">
-                {" "}
                 <div
                   className="cursor-pointer"
                   onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -139,6 +139,11 @@ export default function Navbar() {
                       onClick={() => {
                         logout();
                         setDropdownOpen(false);
+
+                        if (pathname === "/profile") {
+                          router.push("/");
+                        }
+
                       }}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                     >
@@ -251,7 +256,6 @@ export default function Navbar() {
               })}
               {userSession ? (
                 <div className="mt-6 relative">
-                  {" "}
                   <div
                     className="cursor-pointer"
                     onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -275,6 +279,11 @@ export default function Navbar() {
                           logout();
                           setDropdownOpen(false);
                           setMobileMenuOpen(false);
+
+                          if (pathname === "/profile") {
+                            router.push("/");
+                          }
+                          
                         }}
                         className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                       >

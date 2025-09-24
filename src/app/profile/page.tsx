@@ -28,11 +28,12 @@ export default function ProfilePage() {
 
       const { data: userData, error: userError } =
         await supabase.auth.getUser();
+
       if (userError || !userData?.user) {
-        setError("Unable to get current user. Please log in again.");
-        setLoading(false);
+        router.push("/");
         return;
       }
+
       const userId = userData.user.id;
 
       const { data, error: profileError } = await supabase
@@ -54,7 +55,7 @@ export default function ProfilePage() {
     };
 
     fetchProfile();
-  }, []);
+  }, [router]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 to-orange-50 py-12">
