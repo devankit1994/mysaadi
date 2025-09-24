@@ -48,7 +48,7 @@ export default function UpdateProfilePage() {
       const { data: userData, error: userError } =
         await supabase.auth.getUser();
       if (userError || !userData?.user) {
-        alert("Unable to get current user. Please log in again.");
+        router.push("/");
         return;
       }
       const userId = userData.user.id;
@@ -72,7 +72,20 @@ export default function UpdateProfilePage() {
       });
     };
     fetchProfile();
-  }, []);
+
+    // ⭐ Auth state change listener
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === "SIGNED_OUT" || !session) {
+          router.push("/"); // logout hote hi home page
+        }
+      }
+    );
+
+    return () => {
+      authListener?.subscription.unsubscribe();
+    };
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -83,7 +96,6 @@ export default function UpdateProfilePage() {
       const fileExt = form.profile_picture.name.split(".").pop();
       const fileName = `${Date.now()}.${fileExt}`;
 
-      // Upload to Supabase Storage
       const { data, error } = await supabase.storage
         .from("profile-pictures")
         .upload(fileName, form.profile_picture);
@@ -100,10 +112,10 @@ export default function UpdateProfilePage() {
       imageUrl = publicUrl;
     }
 
-    // Get the current user
     const { data: userData, error: userError } = await supabase.auth.getUser();
     if (userError || !userData?.user) {
       alert("Unable to get current user. Please log in again.");
+      router.push("/");
       return;
     }
     const userId = userData.user.id;
