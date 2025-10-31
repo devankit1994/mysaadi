@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabaseClient";
 import { Session } from "@supabase/supabase-js";
+import { redirect } from "next/navigation";
 
 export async function checkLoginStatus() {
   const {
@@ -26,5 +27,7 @@ export async function logout() {
   const { error } = await supabase.auth.signOut();
   if (error) {
     console.error("Logout Error:", error);
+  } else {
+    redirect("/");
   }
 }

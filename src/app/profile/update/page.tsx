@@ -7,16 +7,14 @@ import { useRouter } from "next/navigation";
 
 export default function UpdateProfilePage() {
   const [form, setForm] = useState<{
-    first_name: string;
-    last_name: string;
+    full_name: string;
     mobile_number: string;
     dob: string;
     religion: string;
     profile_picture: File | string;
     bio: string;
   }>({
-    first_name: "",
-    last_name: "",
+    full_name: "",
     mobile_number: "",
     dob: "",
     religion: "",
@@ -24,7 +22,42 @@ export default function UpdateProfilePage() {
     bio: "",
   });
 
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // Get the current authenticated user
+        const { data: userData, error: userError } = await supabase.auth.getUser();
+        
+        if (userError || !userData?.user) {
+          alert("Unable to get current user. Please log in again.");
+          router.push("/");
+          return;
+        }
+
+        const user = userData.user;
+
+        // Populate form with data from raw_user_meta_data and other fields
+        setForm({
+          full_name: user.user_metadata?.full_name || user.user_metadata?.name || "",
+          mobile_number: user.phone || user.user_metadata?.phone || "",
+          dob: user.user_metadata?.dob || "",
+          religion: user.user_metadata?.religion || "",
+          profile_picture: user.user_metadata?.avatar_url || user.user_metadata?.picture || "",
+          bio: user.user_metadata?.bio || "",
+        });
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        alert("Failed to load user data.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [router]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -42,37 +75,6 @@ export default function UpdateProfilePage() {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
   };
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const { data: userData, error: userError } =
-        await supabase.auth.getUser();
-      if (userError || !userData?.user) {
-        alert("Unable to get current user. Please log in again.");
-        return;
-      }
-      const userId = userData.user.id;
-      const { data: profile, error: profileError } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", userId)
-        .single();
-      if (profileError) {
-        console.error("Error fetching profile:", profileError.message);
-        return;
-      }
-      setForm({
-        first_name: profile.first_name || "",
-        last_name: profile.last_name || "",
-        mobile_number: profile.mobile_number || "",
-        dob: profile.dob || "",
-        religion: profile.religion || "",
-        profile_picture: profile.profile_picture || "",
-        bio: profile.bio || "",
-      });
-    };
-    fetchProfile();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -106,27 +108,38 @@ export default function UpdateProfilePage() {
       alert("Unable to get current user. Please log in again.");
       return;
     }
-    const userId = userData.user.id;
 
-    const { error: updateError } = await supabase
-      .from("profiles")
-      .update({
-        first_name: form.first_name,
-        last_name: form.last_name,
-        mobile_number: form.mobile_number,
+    // Update user metadata in Supabase
+    const { error: updateError } = await supabase.auth.updateUser({
+      data: {
+        full_name: form.full_name,
+        phone: form.mobile_number,
         dob: form.dob,
         religion: form.religion,
-        profile_picture: imageUrl,
+        avatar_url: imageUrl || (typeof form.profile_picture === 'string' ? form.profile_picture : ''),
         bio: form.bio,
-      })
-      .eq("id", userId);
+      },
+    });
 
     if (updateError) {
-      alert("Failed to update profile: " + updateError.message);
-    } else {
-      alert("Profile updated successfully!");
+      alert("Profile update failed: " + updateError.message);
+      return;
     }
+
+    alert("Profile updated successfully!");
+    router.push("/profile");
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 to-orange-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading profile data...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 to-orange-50 py-12">
@@ -136,8 +149,7 @@ export default function UpdateProfilePage() {
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           {[
-            { label: "First Name", name: "first_name" },
-            { label: "Last Name", name: "last_name" },
+            { label: "Full Name", name: "full_name" },
             { label: "Mobile Number", name: "mobile_number" },
             { label: "Date of Birth", name: "dob", type: "date" },
             { label: "Religion", name: "religion" },

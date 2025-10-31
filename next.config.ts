@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       "www.redveds.com",
       "images.pexels.com",
       "lh3.googleusercontent.com",
+      "hhsbemdpqqxvjlatlqbj.supabase.co",
     ],
   },
 };

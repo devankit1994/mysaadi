@@ -19,20 +19,6 @@ export default function FindYourMatchPage() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchProfiles = async () => {
-      const { data, error } = await supabase.from("profiles").select("*");
-      if (error) {
-        alert("Error fetching profiles: " + error.message);
-      } else {
-        setProfiles(data || []);
-      }
-      setLoading(false);
-    };
-
-    fetchProfiles();
-  }, []);
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center text-gray-500">

@@ -13,6 +13,7 @@ type Profile = {
   religion: string;
   profile_picture: string;
   bio: string;
+  email: string;
 };
 
 export default function ProfilePage() {
@@ -33,23 +34,29 @@ export default function ProfilePage() {
         setLoading(false);
         return;
       }
-      const userId = userData.user.id;
 
-      const { data, error: profileError } = await supabase
-        .from("profiles")
-        .select(
-          "first_name, last_name, mobile_number, dob, religion, profile_picture, bio"
-        )
-        .eq("id", userId)
-        .single();
+      const user = userData.user;
+      const metadata = user.user_metadata || {};
 
-      if (profileError) {
-        setError("Failed to fetch profile: " + profileError.message);
-        setLoading(false);
-        return;
-      }
+      // Extract name from full_name or name field
+      const fullName = metadata.full_name || metadata.name || "";
+      const nameParts = fullName.split(" ");
+      const firstName = nameParts[0] || "";
+      const lastName = nameParts.slice(1).join(" ") || "";
 
-      setProfile(data as Profile);
+      // Map authentication data to profile
+      const profileData: Profile = {
+        first_name: firstName,
+        last_name: lastName,
+        mobile_number: user.phone || metadata.phone || "",
+        dob: metadata.dob || "",
+        religion: metadata.religion || "",
+        profile_picture: metadata.avatar_url || metadata.picture || "",
+        bio: metadata.bio || "",
+        email: user.email || "",
+      };
+
+      setProfile(profileData);
       setLoading(false);
     };
 
@@ -57,8 +64,8 @@ export default function ProfilePage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 to-orange-50 py-12">
-      <div className="max-w-2xl mx-auto w-full bg-white rounded-xl shadow-md p-8">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-orange-50 py-12 px-4">
+      <div className="max-w-2xl mx-auto w-full">
         <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           Profile
         </h1>
@@ -85,7 +92,10 @@ export default function ProfilePage() {
                 <div className="font-semibold text-xl text-gray-800">
                   {profile.first_name} {profile.last_name}
                 </div>
-                <div className="text-gray-600">{profile.mobile_number}</div>
+                <div className="text-gray-600">{profile.email}</div>
+                {profile.mobile_number && (
+                  <div className="text-gray-600">{profile.mobile_number}</div>
+                )}
               </div>
             </div>
             <div className="bg-gray-50 rounded-lg p-4 shadow-sm">
